@@ -3,14 +3,8 @@ import pandas as pd
 import time
 import os
 
-
-# Ambil API key dari variabel lingkungan
 openai.api_key = os.getenv("API_KEY")
 
-# Prompt yang ingin digunakan
-prompt = "Buatkan esai tentang Bijak Menggunakan Sosmed bagi Remaja"
-
-# Inisialisasi daftar untuk menyimpan jawaban
 responses = []
 
 for i in range(5):  # Sesuaikan dengan range(100) jika ingin 100 jawaban
@@ -32,13 +26,11 @@ for i in range(5):  # Sesuaikan dengan range(100) jika ingin 100 jawaban
             ]
         )
         
-        # Ambil teks respons dan hilangkan spasi berlebih
         text_response = response.choices[0].message.content
         
         # Menyimpan jawaban
         responses.append(text_response)
         
-        # Memberikan jeda untuk menghindari rate limit
         time.sleep(1)
 
     except Exception as e:

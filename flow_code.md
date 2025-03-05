@@ -65,3 +65,50 @@ Terdapat beberapa tahapan untuk menyiapkan data sebelum pelatihan. Alur prosesny
 4. Ekstraksi fitur stylometric seperti rata-rata panjang kata, rasio kata unik terhadap total jumlah kata, rasio tanda baca, panjang kalimat. Untuk keperluan klasifikasi.
 
 ---
+
+## Semantic Similarity Model
+
+Model Semantic Similarity ini akan digunakan pada dua dataset berbeda dan training terpisah, yaitu dataset `Student_ChatGPT` dan `Only_ChatGPT`. Model yang sudah dievaluasi akan disimpan dalam format `.h5`. Machine learning framework yang digunakan pada modelling ini yaitu TensorFlow.
+
+Berikut Alur Training Model Semantic Similarity
+1. Data training digunakan untuk pelatihan model.
+2. Base model yang digunakan yaitu IndoBERT-base
+3. Fine-tuning untuk kebutuhan semantic similarity yaitu menggunakan Dense Layer, Dropout, Contrastive Loss, dan Adam Optimizer.
+
+Pada akhirnya nanti **terdapat 2 model Semantic Similarity** yang dibuat. **Model #1** untuk memahami perbadaan/kemiripan antara esai siswa dan esai ChatGPT. **Model #2** untuk memahami gaya penulisan ChatGPT.
+
+
+### Training #1 dataset `Student_ChatGPT`
+
+Training pertama untuk model semantic similarity yaitu menggunakan dataset `Student_ChatGPT` yang bertujuan mengetahui perbedaan/kemiripan antara esai siswa dan esai ChatGPT. 
+
+**Pasangan Positif**
+- Esai Siswa - Esai Siswa (within-data)
+- Esai Siswa - Esai Siswa (cross-data)
+- Esai ChatGPT - Esai ChatGPT (within-data)
+- Esai ChatGPT - Esai ChatGPT (cross-data)
+
+**Pasangan Negatif**
+- Esai Siswa - Esai ChatGPT (cross-data)
+  
+### Training #2 dataset `Only_ChatGPT`
+
+Training kedua untuk model semantic similarity yaitu menggunakan dataset `Only_ChatGPT` yang bertujuan memahami gaya penulisan ChatGPT pada pengetahuannya terhadap RPS mata pelejaran. 
+
+**Pasangan Positif**
+- Pengetahuan ChatGPT - Pengetahuan ChatGPT(within-data)
+- Pengetahuan ChatGPT - Pengetahuan ChatGPT(cross-data)
+
+---
+
+## Classification
+
+Model klasifikasi ini bertujuan untuk mengategorikan teks input ini diklasifikasikan sebagai buatan manusia atau AI. Fitur yang digunakan dalam proses pelatihan ini yaitu sebagai berikut:
+1. Hasil Embedding dari model #1 (Dataset `Student_ChatGPT`)
+2. Hasil Embedding dari model #2 (Dataset `Only_ChatGPT`)
+3. Hasil Similarity Score dari model #1 (Dataset `Student_ChatGPT`, terhadap label Human)
+4. Hasil Similarity Score dari model #1 (Dataset `Student_ChatGPT`, terhadap label AI)
+5. Hasil Similarity Score dari model #2 (Dataset `Only_ChatGPT`, terhadap label AI)
+6. Fitur Stylometric
+
+Dataset yang digunakan yaitu gabungan Dataset training dari `Student_ChatGPT` dan `Only_ChatGPT`. 

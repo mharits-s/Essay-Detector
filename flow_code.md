@@ -60,7 +60,7 @@ Pengetahuan yang dihasilkan oleh ChatGPT diperoleh dengan cara yang sama, yaitu 
 
 Terdapat beberapa tahapan untuk menyiapkan data sebelum pelatihan. Alur prosesnya sebagai berikut:
 1. Pembagian data, Training set 70%, Validation set 20%, Test set 10%
-2. Segmentati teks, mengubah 1 data yang masih berupa paragraf menjadi kalimat yang terpisah (menyesuaikan jumlah kalimat yang ada pada 1 data/paragraf tersebut.)
+2. Segmentasi teks, mengubah 1 data yang masih berupa paragraf menjadi kalimat yang terpisah (menyesuaikan jumlah kalimat yang ada pada 1 data/paragraf tersebut.)
 3. BERT Tokenizer menggunakan IndoBERT-base untuk keperluan similarity
 4. Ekstraksi fitur stylometric seperti rata-rata panjang kata, rasio kata unik terhadap total jumlah kata, rasio tanda baca, panjang kalimat. Untuk keperluan klasifikasi.
 
@@ -111,4 +111,4 @@ Model klasifikasi ini bertujuan untuk mengategorikan teks input ini diklasifikas
 5. Hasil Similarity Score dari model #2 (Dataset `Only_ChatGPT`, terhadap label AI)
 6. Fitur Stylometric
 
-Dataset yang digunakan yaitu gabungan Dataset training dari `Student_ChatGPT` dan `Only_ChatGPT`. 
+Dataset yang digunakan pada tahap klasifikasi yaitu gabungan Dataset training dari `Student_ChatGPT` dan `Only_ChatGPT`. 
